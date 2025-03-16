@@ -24,9 +24,11 @@ public class Ball
         this.BallTexture = ballTexture;
     }
 
-    public Ball moveBall(Ball currentBall,float ballPositionY, float ballPositionX, float ballSpeed)
+    public Ball moveBall(Ball currentBall, float ballSpeed)
     {
         var kstate = Keyboard.GetState();
+        float ballPositionY = currentBall.BallPosition.Y;
+        float ballPositionX = currentBall.BallPosition.X;
 
         if (kstate.IsKeyDown(Keys.Up))
         {
