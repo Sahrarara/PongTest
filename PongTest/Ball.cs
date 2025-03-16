@@ -24,33 +24,32 @@ public class Ball
         this.BallTexture = ballTexture;
     }
 
-    public float moveBall(float ballPositionY, float ballPositionX, float ballSpeed)
+    public Ball moveBall(Ball currentBall,float ballPositionY, float ballPositionX, float ballSpeed)
     {
         var kstate = Keyboard.GetState();
 
         if (kstate.IsKeyDown(Keys.Up))
         {
-            ballPositionY -= ballSpeed;
+            currentBall.BallPosition = new Vector2(currentBall.BallPosition.X, ballPositionY -= ballSpeed);
         }
         if (kstate.IsKeyDown(Keys.Down))
         {
-            ballPositionY += ballSpeed;
+            currentBall.BallPosition = new Vector2(currentBall.BallPosition.X, ballPositionY += ballSpeed);
         }
         if (kstate.IsKeyDown(Keys.Left))
         {
-            ballPositionX -= ballSpeed;
+            currentBall.BallPosition = new Vector2(ballPositionX -= ballSpeed, currentBall.BallPosition.Y);
         }
         if (kstate.IsKeyDown(Keys.Right))
         {
-            ballPositionX += ballSpeed;
+            currentBall.BallPosition = new Vector2(ballPositionX += ballSpeed, currentBall.BallPosition.Y);
         }
 
-        return ballSpeed;
+        return currentBall;
     }
 
     public void checkWindowCollision (float ballPositionY,float ballPositionX,int BufferWidth,int BufferHeight)
     {
-        
         CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);
         CheckWindowCollisionY(ballPositionY,BufferHeight, this.BallTexture.Height);
     }

@@ -20,7 +20,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         ball = new Ball(
-            10000f,
+            1000f,
             new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2),
             Content.Load<Texture2D>("ball"));
 
@@ -54,7 +54,7 @@ public class Game1 : Game
         float updateBallSpeed = ball.BallSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-        updateBallSpeed = ball.moveBall(ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
+        ball.moveBall(ball,ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
 
 
         ball.checkWindowCollision(ball.BallPosition.Y, ball.BallPosition.X, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
