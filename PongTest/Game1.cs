@@ -22,16 +22,12 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
         ball = new Ball(
-            1000f,
-            new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight),
+            10000f,
+            new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2),
             Content.Load<Texture2D>("ball"));
 
-        //ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-        //                           _graphics.PreferredBackBufferHeight / 2);
 
-        //ballSpeed = 1000f;
         base.Initialize();
     }
 
@@ -58,48 +54,14 @@ public class Game1 : Game
         //Time since update was last called
         //Every frame is a max speed of ballspeed and not more,
         //otherwise the speed goes out of hand and framerate depicts how fast the game runs
-        float updateBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        float updateBallSpeed = ball.BallSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        //var kstate = Keyboard.GetState();
 
-        ball.moveBall(ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
-            //ballPosition.Y, ballPosition.X, updateBallSpeed);
+        updateBallSpeed = ball.moveBall(ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
 
-        //if (kstate.IsKeyDown(Keys.Up))
-        //{
-        //    ballPosition.Y -= updateBallSpeed;
-        //}
-        //if (kstate.IsKeyDown(Keys.Down))
-        //{
-        //    ballPosition.Y += updateBallSpeed;
-        //}
-        //if (kstate.IsKeyDown(Keys.Left))
-        //{
-        //    ballPosition.X -= updateBallSpeed;
-        //}
-        //if (kstate.IsKeyDown(Keys.Right))
-        //{
-        //    ballPosition.X += updateBallSpeed;
-        //}
 
-        ball.checkWindowCollision(ballPosition.Y, ballPosition.X, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
+        ball.checkWindowCollision(ball.BallPosition.Y, ball.BallPosition.X, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
 
-        //if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
-        //{
-        //    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
-        //}
-        //else if (ballPosition.X < ballTexture.Width / 2)
-        //{
-        //    ballPosition.X = 0 + ballTexture.Width /2;
-        //}
-        //if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
-        //{
-        //    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
-        //}
-        //else if (ballPosition.Y < ballTexture.Height / 2)
-        //{
-        //    ballPosition.Y =  0 + ballTexture.Height / 2;
-        //}
 
         base.Update(gameTime);
     }

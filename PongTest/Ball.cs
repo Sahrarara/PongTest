@@ -4,10 +4,13 @@ using Microsoft.Xna.Framework.Input;
 using PongTest;
 using System;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 
 public class Ball
 {
-    float ballSpeed;
+    private float _ballSpeed;
+    public float BallSpeed { get => _ballSpeed; set => _ballSpeed = value; }
+
     private Vector2 _ballPosition;
     public Vector2 BallPosition { get => _ballPosition; set => _ballPosition = value; }
 
@@ -16,21 +19,9 @@ public class Ball
 
     public Ball(float ballSpeed, Vector2 ballPosition, Texture2D ballTexture)
     {
-        this.ballSpeed = ballSpeed;
+        this.BallSpeed = ballSpeed;
         this.BallPosition = ballPosition;
         this.BallTexture = ballTexture;
-    }
-
-    public void SpawnBall(float SpawnpositionY, float SpawnpositionX, float baseSpeed)
-    {
-        ballSpeed = baseSpeed;
-        BallPosition = new Vector2(SpawnpositionX / 2,
-                           SpawnpositionY/ 2);
-    }
-
-    public void LoadBall(Texture2D Texture)
-    {
-        this.BallTexture = Texture;
     }
 
     public float moveBall(float ballPositionY, float ballPositionX, float ballSpeed)
