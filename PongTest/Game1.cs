@@ -30,15 +30,7 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
-        //ball.BallTexture = Content.Load<Texture2D>("ball");
-        //ball.LoadBall(Content.Load<Texture2D>("ball"));
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
-        //ballTexture = Content.Load<Texture2D>("ball");
-
-
-        // TODO: use this.Content to load your game content here
     }
 
     protected override void Update(GameTime gameTime)
@@ -53,13 +45,8 @@ public class Game1 : Game
         //otherwise the speed goes out of hand and framerate depicts how fast the game runs
         float updateBallSpeed = ball.BallSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
-        //ball.moveBall(ball, ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
         ball.moveBall(ball, updateBallSpeed);
-
-
         ball.checkWindowCollision(ball, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
-
 
         base.Update(gameTime);
     }
@@ -67,7 +54,7 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        //gameBallTexture = ball.BallTexture;
+
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
         _spriteBatch.Draw(
