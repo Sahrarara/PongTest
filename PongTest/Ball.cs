@@ -60,7 +60,7 @@ public class Ball
     public void checkWindowCollision (float ballPositionY,float ballPositionX,int BufferWidth,int BufferHeight)
     {
         
-        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);s
+        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);
         CheckWindowCollisionY(ballPositionY,BufferHeight, this.BallTexture.Height);
     }
 
