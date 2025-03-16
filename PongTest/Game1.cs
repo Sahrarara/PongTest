@@ -54,10 +54,10 @@ public class Game1 : Game
         float updateBallSpeed = ball.BallSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-        ball.moveBall(ball,ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
+        ball.moveBall(ball, ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
 
 
-        ball.checkWindowCollision(ball.BallPosition.Y, ball.BallPosition.X, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
+        ball.checkWindowCollision(ball, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
 
 
         base.Update(gameTime);

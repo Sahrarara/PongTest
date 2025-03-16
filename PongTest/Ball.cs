@@ -45,41 +45,41 @@ public class Ball
             currentBall.BallPosition = new Vector2(ballPositionX += ballSpeed, currentBall.BallPosition.Y);
         }
 
+        //checkWindowCollision(currentBall.BallPosition.Y, currentBall.BallPosition.X, currentBall.BallTexture.Width, currentBall.BallTexture.Height);
+
         return currentBall;
     }
 
-    public void checkWindowCollision (float ballPositionY,float ballPositionX,int BufferWidth,int BufferHeight)
+    public void checkWindowCollision (Ball currentBall,int BufferWidth,int BufferHeight)
     {
-        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);
-        CheckWindowCollisionY(ballPositionY,BufferHeight, this.BallTexture.Height);
+        CheckWindowCollisionX(currentBall, currentBall.BallPosition.X,BufferWidth, this.BallTexture.Width);
+        CheckWindowCollisionY(currentBall, currentBall.BallPosition.Y, BufferHeight, this.BallTexture.Height);
     }
 
-    private float CheckWindowCollisionY(float ballPositionY,int BufferHeight, float ballTextureHeight)
+    private void CheckWindowCollisionY(Ball currentBall,float ballPositionY,int BufferHeight, float ballTextureHeight)
     {
 
         if (ballPositionY > BufferHeight - ballTextureHeight / 2)
         {
-            ballPositionY = BufferHeight - ballTextureHeight / 2;
+            currentBall.BallPosition = new Vector2(currentBall.BallPosition.X, BufferHeight - ballTextureHeight / 2);
         }
         else if (ballPositionY < ballTextureHeight / 2)
         {
-            ballPositionY = 0 + ballTextureHeight / 2;
+            currentBall.BallPosition = new Vector2(currentBall.BallPosition.X, 0 + ballTextureHeight / 2);
         }
-        return ballPositionY;
     }
 
-    private float CheckWindowCollisionX(float ballPositionX, int BufferWidth, float ballTextureWidth)
+    private void CheckWindowCollisionX(Ball currentBall,float ballPositionX, int BufferWidth, float ballTextureWidth)
     {
 
         if (ballPositionX > BufferWidth - ballTextureWidth / 2)
         {
-            ballPositionX = BufferWidth - ballTextureWidth / 2;
+            currentBall.BallPosition = new Vector2(BufferWidth - ballTextureWidth / 2, currentBall.BallPosition.Y);
         }
         else if (ballPositionX < ballTextureWidth / 2)
         {
-            ballPositionX = 0 + ballTextureWidth / 2;
+            currentBall.BallPosition = new Vector2(0 + ballTextureWidth / 2, currentBall.BallPosition.Y);
         }
-        return ballPositionX;
     }
 
 }
