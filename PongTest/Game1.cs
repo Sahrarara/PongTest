@@ -6,9 +6,6 @@ namespace PongTest;
 
 public class Game1 : Game
 {
-    Texture2D gameBallTexture;
-    Vector2 ballPosition;
-    float ballSpeed;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Ball ball;
