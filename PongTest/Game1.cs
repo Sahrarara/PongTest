@@ -62,7 +62,8 @@ public class Game1 : Game
 
         //var kstate = Keyboard.GetState();
 
-        ball.moveBall(ballPosition.Y, ballPosition.X, updateBallSpeed);
+        ball.moveBall(ball.BallPosition.Y, ball.BallPosition.X, updateBallSpeed);
+            //ballPosition.Y, ballPosition.X, updateBallSpeed);
 
         //if (kstate.IsKeyDown(Keys.Up))
         //{
@@ -106,16 +107,16 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        gameBallTexture = ball.BallTexture;
+        //gameBallTexture = ball.BallTexture;
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
         _spriteBatch.Draw(
-            gameBallTexture,
-            ballPosition,
+            ball.BallTexture,
+            ball.BallPosition,
             null,
             Color.White,
             0f,
-            new Vector2(gameBallTexture.Width /2, gameBallTexture.Height /2),
+            new Vector2(ball.BallTexture.Width /2, ball.BallTexture.Height /2),
             Vector2.One,
             SpriteEffects.None,
             0f

@@ -8,21 +8,23 @@ using System.Reflection.Metadata;
 public class Ball
 {
     float ballSpeed;
-    Vector2 ballPosition;
+    private Vector2 _ballPosition;
+    public Vector2 BallPosition { get => _ballPosition; set => _ballPosition = value; }
+
     private Texture2D _ballTexture;
-    public Texture2D BallTexture { get => _ballTexture; set => _ballTexture = BallTexture; }
+    public Texture2D BallTexture { get => _ballTexture; set => _ballTexture = value; }
 
     public Ball(float ballSpeed, Vector2 ballPosition, Texture2D ballTexture)
     {
         this.ballSpeed = ballSpeed;
-        this.ballPosition = ballPosition;
+        this.BallPosition = ballPosition;
         this.BallTexture = ballTexture;
     }
 
     public void SpawnBall(float SpawnpositionY, float SpawnpositionX, float baseSpeed)
     {
         ballSpeed = baseSpeed;
-        ballPosition = new Vector2(SpawnpositionX / 2,
+        BallPosition = new Vector2(SpawnpositionX / 2,
                            SpawnpositionY/ 2);
     }
 
@@ -58,8 +60,8 @@ public class Ball
     public void checkWindowCollision (float ballPositionY,float ballPositionX,int BufferWidth,int BufferHeight)
     {
         
-        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);
-        CheckWindowCollisionY(ballPositionY, BufferHeight, this.BallTexture.Height);
+        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);s
+        CheckWindowCollisionY(ballPositionY,BufferHeight, this.BallTexture.Height);
     }
 
     private float CheckWindowCollisionY(float ballPositionY,int BufferHeight, float ballTextureHeight)
