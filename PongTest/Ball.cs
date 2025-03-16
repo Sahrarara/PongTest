@@ -9,20 +9,14 @@ public class Ball
 {
     float ballSpeed;
     Vector2 ballPosition;
-    Texture2D ballTexture;
+    private Texture2D _ballTexture;
+    public Texture2D BallTexture { get => _ballTexture; set => _ballTexture = BallTexture; }
 
-
-    public Ball()
+    public Ball(float ballSpeed, Vector2 ballPosition, Texture2D ballTexture)
     {
-        //ballSpeed = 0;
-        //ballPosition = new Vector2(0,0);
-        //ballTexture = new Texture2D(null,0,0);
-
-        //ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-        //                   _graphics.PreferredBackBufferHeight / 2);
-        //ballSpeed = 1000f;
-        //_spriteBatch = new SpriteBatch(GraphicsDevice);
-        //float updateBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        this.ballSpeed = ballSpeed;
+        this.ballPosition = ballPosition;
+        this.BallTexture = ballTexture;
     }
 
     public void SpawnBall(float SpawnpositionY, float SpawnpositionX, float baseSpeed)
@@ -34,7 +28,7 @@ public class Ball
 
     public void LoadBall(Texture2D Texture)
     {
-        Texture = Texture;
+        this.BallTexture = Texture;
     }
 
     public float moveBall(float ballPositionY, float ballPositionX, float ballSpeed)
@@ -63,14 +57,13 @@ public class Ball
 
     public void checkWindowCollision (float ballPositionY,float ballPositionX,int BufferWidth,int BufferHeight)
     {
-        CheckWindowCollisionX(ballPositionX,BufferWidth);
-        CheckWindowCollisionY(ballPositionY, BufferHeight);
+        
+        CheckWindowCollisionX(ballPositionX,BufferWidth, this.BallTexture.Width);
+        CheckWindowCollisionY(ballPositionY, BufferHeight, this.BallTexture.Height);
     }
 
-    private float CheckWindowCollisionY(float ballPositionY,int BufferHeight)
+    private float CheckWindowCollisionY(float ballPositionY,int BufferHeight, float ballTextureHeight)
     {
-
-        float ballTextureHeight = ballTexture.Height;
 
         if (ballPositionY > BufferHeight - ballTextureHeight / 2)
         {
@@ -83,10 +76,8 @@ public class Ball
         return ballPositionY;
     }
 
-    private float CheckWindowCollisionX(float ballPositionX, int BufferWidth)
+    private float CheckWindowCollisionX(float ballPositionX, int BufferWidth, float ballTextureWidth)
     {
-        float ballTextureWidth = ballTexture.Width;
-
 
         if (ballPositionX > BufferWidth - ballTextureWidth / 2)
         {
