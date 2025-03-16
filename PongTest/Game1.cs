@@ -11,6 +11,7 @@ public class Game1 : Game
     float ballSpeed;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private Ball ball;
 
     public Game1()
     {
@@ -22,19 +23,23 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-                                   _graphics.PreferredBackBufferHeight / 2);
+        ball = new Ball();
+        ball.SpawnBall( _graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2, 1000f);
 
-        ballSpeed = 1000f;
+        //ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
+        //                           _graphics.PreferredBackBufferHeight / 2);
+
+        //ballSpeed = 1000f;
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
+        ball.LoadBall(Content.Load<Texture2D>("ball"));
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
-        ballTexture = Content.Load<Texture2D>("ball");
+        //ballTexture = Content.Load<Texture2D>("ball");
 
 
         // TODO: use this.Content to load your game content here
@@ -52,43 +57,45 @@ public class Game1 : Game
         //otherwise the speed goes out of hand and framerate depicts how fast the game runs
         float updateBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        var kstate = Keyboard.GetState();
+        //var kstate = Keyboard.GetState();
 
-        if (kstate.IsKeyDown(Keys.Up))
-        {
-            ballPosition.Y -= updateBallSpeed;
-        }
-        if (kstate.IsKeyDown(Keys.Down))
-        {
-            ballPosition.Y += updateBallSpeed;
-        }
-        if (kstate.IsKeyDown(Keys.Left))
-        {
-            ballPosition.X -= updateBallSpeed;
-        }
-        if (kstate.IsKeyDown(Keys.Right))
-        {
-            ballPosition.X += updateBallSpeed;
-        }
+        ball.moveBall(ballPosition.Y, ballPosition.X, updateBallSpeed);
 
-        if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
-        {
-            ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
-        }
-        else if (ballPosition.X < ballTexture.Width / 2)
-        {
-            ballPosition.X = 0 + ballTexture.Width /2;
-        }
+        //if (kstate.IsKeyDown(Keys.Up))
+        //{
+        //    ballPosition.Y -= updateBallSpeed;
+        //}
+        //if (kstate.IsKeyDown(Keys.Down))
+        //{
+        //    ballPosition.Y += updateBallSpeed;
+        //}
+        //if (kstate.IsKeyDown(Keys.Left))
+        //{
+        //    ballPosition.X -= updateBallSpeed;
+        //}
+        //if (kstate.IsKeyDown(Keys.Right))
+        //{
+        //    ballPosition.X += updateBallSpeed;
+        //}
 
+        ball.checkWindowCollision(ballPosition.Y, ballPosition.X, _graphics.PreferredBackBufferWidth,_graphics.PreferredBackBufferHeight);
 
-        if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
-        {
-            ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
-        }
-        else if (ballPosition.Y < ballTexture.Height / 2)
-        {
-            ballPosition.Y =  0 + ballTexture.Height / 2;
-        }
+        //if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
+        //{
+        //    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
+        //}
+        //else if (ballPosition.X < ballTexture.Width / 2)
+        //{
+        //    ballPosition.X = 0 + ballTexture.Width /2;
+        //}
+        //if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
+        //{
+        //    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
+        //}
+        //else if (ballPosition.Y < ballTexture.Height / 2)
+        //{
+        //    ballPosition.Y =  0 + ballTexture.Height / 2;
+        //}
 
         base.Update(gameTime);
     }
@@ -114,4 +121,9 @@ public class Game1 : Game
 
         base.Draw(gameTime);
     }
+    public void getGraphics(GraphicsDeviceManager graphics)
+    {
+        _graphics = graphics;
+    }
+
 }
